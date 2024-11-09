@@ -30,10 +30,6 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
-    public Optional<Product> findById(String productId, String category) {
-        return this.productRepository.findById(productId, new PartitionKey(category));
-    }
-
     public Optional<Product> findById(String productId) {
         return this.productRepository.findById(productId);
     }

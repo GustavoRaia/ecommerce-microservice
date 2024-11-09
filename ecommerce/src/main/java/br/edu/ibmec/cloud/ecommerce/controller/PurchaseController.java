@@ -31,12 +31,12 @@ public class PurchaseController {
 
     @GetMapping
     public ResponseEntity<Purchase> getPurchaseById(@RequestParam String accountId) {
-        Purchase purchases = this.service.findById(accountId);
-        return new ResponseEntity<>(purchases, HttpStatus.OK);
+        Purchase purchase = this.service.findById(accountId);
+        return new ResponseEntity<>(purchase, HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity delete(@PathVariable("id") String id) throws Exception{
+    public ResponseEntity delete(@PathVariable("id") String id) throws Exception {
         this.service.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

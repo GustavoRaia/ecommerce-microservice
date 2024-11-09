@@ -13,11 +13,12 @@ import lombok.Data;
 @Data
 @Container(containerName = "orders")
 public class Order {
+
     @Id
     private String orderId;
     @PartitionKey
     private String productId;
-    private int userId;
+    private String accountId;
     private LocalDateTime dataOrder;
     private String status;
     

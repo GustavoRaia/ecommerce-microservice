@@ -6,7 +6,6 @@ import com.azure.cosmos.models.PartitionKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -17,7 +16,6 @@ public class PurchaseService {
     private PurchaseRepository purchaseRepository;
 
     public Purchase findById(String accountId) {
-        System.out.println(this.purchaseRepository.findByAccountId(accountId));
         return this.purchaseRepository.findByAccountId(accountId);
     }
 
