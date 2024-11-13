@@ -11,6 +11,19 @@ import java.time.LocalDate;
 @Container(containerName = "purchases")
 public class Purchase {
 
+    @Data
+    public static class Extract {
+        private String transactionId;
+
+        private String date;
+
+        private String description;
+
+        private double amount;
+
+        private double balance;
+    }
+
     @Id
     private String purchaseId;
 
@@ -20,5 +33,7 @@ public class Purchase {
     private double totalSpent;
 
     private LocalDate lastPurchase;
+
+    private List<Extract> extractList;
 
 }
