@@ -6,6 +6,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Container(containerName = "purchases")
