@@ -4,8 +4,7 @@ import lombok.Data;
 
 @Data
 public class TransacaoRequest {
-    private String accountId;
-    private String numeroCartao;
+    private String numero;
     private String comerciante;
     private Double valor;
 
