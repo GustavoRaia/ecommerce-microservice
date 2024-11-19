@@ -48,10 +48,10 @@ public class TransacaoControllerTest {
     // Teste para autorizar transação com sucesso
     @Test
     public void testAutorizarTransacao_Sucesso() throws Exception {
-        when(cartaoService.buscarCartaoPorId(1)).thenReturn(cartao);
+        when(cartaoService.buscarCartaoPorNumero("1")).thenReturn(cartao);
         when(transacaoService.autorizacaoTransacao(cartao, 100.0, "Loja X")).thenReturn(transacao);
 
-        Transacao resultado = transacaoController.autorizarTransacao(1, 100.0, "Loja X");
+        Transacao resultado = transacaoController.autorizarTransacao("1", 100.0, "Loja X");
 
         assertNotNull(resultado);
         assertEquals(1, resultado.getId());
@@ -63,13 +63,13 @@ public class TransacaoControllerTest {
     // Teste para exceção ao autorizar transação com cartão não encontrado
     @Test
     public void testAutorizarTransacao_CartaoNaoEncontrado() throws Exception {
-        when(cartaoService.buscarCartaoPorId(1)).thenReturn(null);
+        when(cartaoService.buscarCartaoPorNumero("1")).thenReturn(null);
 
         Exception exception = assertThrows(TransacaoException.class, () -> {
-            transacaoController.autorizarTransacao(1, 100.0, "Loja X");
+            transacaoController.autorizarTransacao("1", 100.0, "Loja X");
         });
 
-        assertEquals("Cartão com ID 1 não encontrado.", exception.getMessage());
+        assertEquals("Cartão com Número 1 não encontrado.", exception.getMessage());
         verify(transacaoService, never()).autorizacaoTransacao(any(Cartao.class), anyDouble(), anyString());
     }
 
@@ -77,13 +77,13 @@ public class TransacaoControllerTest {
     @Test
     public void testAutorizarTransacao_CartaoInativo() throws Exception {
         cartao.setAtivo(false);
-        when(cartaoService.buscarCartaoPorId(1)).thenReturn(cartao);
+        when(cartaoService.buscarCartaoPorNumero("1")).thenReturn(cartao);
 
         Exception exception = assertThrows(TransacaoException.class, () -> {
-            transacaoController.autorizarTransacao(1, 100.0, "Loja X");
+            transacaoController.autorizarTransacao("1", 100.0, "Loja X");
         });
 
-        assertEquals("Cartão com ID 1 está inativo.", exception.getMessage());
+        assertEquals("Cartão com Número 1 está inativo.", exception.getMessage());
         verify(transacaoService, never()).autorizacaoTransacao(any(Cartao.class), anyDouble(), anyString());
     }
 
@@ -91,10 +91,10 @@ public class TransacaoControllerTest {
     @Test
     public void testAutorizarTransacao_LimiteInsuficiente() throws Exception {
         cartao.setLimite(50.0); // Limite insuficiente
-        when(cartaoService.buscarCartaoPorId(1)).thenReturn(cartao);
+        when(cartaoService.buscarCartaoPorNumero("1")).thenReturn(cartao);
 
         Exception exception = assertThrows(TransacaoException.class, () -> {
-            transacaoController.autorizarTransacao(1, 100.0, "Loja X");
+            transacaoController.autorizarTransacao("1", 100.0, "Loja X");
         });
 
         assertEquals("Limite insuficiente para realizar a transação de valor 100.0", exception.getMessage());
