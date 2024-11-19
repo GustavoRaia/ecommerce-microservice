@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.UniqueElements;
 
 @Data
 @Entity
@@ -21,7 +22,7 @@ public class Cartao {
     @Column
     private double limite;
 
-    @Column
+    @Column(unique = true)
     private String numero;
 
     @OneToMany(mappedBy = "cartao")

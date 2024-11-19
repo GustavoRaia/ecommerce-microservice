@@ -21,16 +21,16 @@ public class TransacaoController {
 
     @PostMapping("/autorizar")
     public Transacao autorizarTransacao(
-            @RequestParam int cartaoId,
+            @RequestParam String numero,
             @RequestParam double valor,
             @RequestParam String comerciante) throws Exception {
-        Cartao cartao = cartaoService.buscarCartaoPorId(cartaoId);
+        Cartao cartao = cartaoService.buscarCartaoPorNumero(numero);
         if (cartao == null) {
-            throw new TransacaoException("Cartão com ID " + cartaoId + " não encontrado.");
+            throw new TransacaoException("Cartão com Número " + numero + " não encontrado.");
         }
 
         if (!cartao.getAtivo()) {
-            throw new TransacaoException("Cartão com ID " + cartaoId + " está inativo.");
+            throw new TransacaoException("Cartão com Número " + numero + " está inativo.");
         }
 
         if (cartao.getLimite() < valor) {
