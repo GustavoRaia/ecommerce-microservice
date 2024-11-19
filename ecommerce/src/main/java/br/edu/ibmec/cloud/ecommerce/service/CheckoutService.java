@@ -41,6 +41,7 @@ public class CheckoutService {
             order.setOrderId(UUID.randomUUID().toString());
             order.setDataOrder(LocalDateTime.now());
             order.setProductId(product.getProductId());
+            order.setProductName(product.getProductName());
             order.setAccountId(accountId);
             order.setStatus("Produto Comprado");
             this.orderRepository.save(order);

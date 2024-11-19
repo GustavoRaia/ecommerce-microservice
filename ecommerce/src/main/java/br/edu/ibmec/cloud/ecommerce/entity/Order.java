@@ -18,6 +18,7 @@ public class Order {
     private String orderId;
     @PartitionKey
     private String productId;
+    private String productName;
     private String accountId;
     private LocalDateTime dataOrder;
     private String status;
