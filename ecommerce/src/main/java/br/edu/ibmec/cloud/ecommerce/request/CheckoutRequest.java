@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class CheckoutRequest {
-    private int idUsuario;
+    private String accountId;
     private String productId;
     private String numeroCartao;
 }
