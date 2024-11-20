@@ -38,8 +38,8 @@ public class UsuarioController {
         }
     }
 
-    @GetMapping("/{cpf}")
-    public ResponseEntity<Usuario> buscarUsuario(@PathVariable String cpf) {
+    @GetMapping
+    public ResponseEntity<Usuario> buscarUsuario(@RequestParam String cpf) {
         Usuario usuario = usuarioService.buscaUsuarioPorCpf(cpf);
         if (usuario != null) {
             return new ResponseEntity<>(usuario, HttpStatus.OK);
