@@ -40,6 +40,10 @@ public class UsuarioService {
         return this.findUsuario(id);
     }
 
+    public Usuario buscaUsuarioPorCpf(String cpf) {
+        return this.findUsuarioByCpf(cpf);
+    }
+
     public void associarCartao(Cartao cartao, int id) throws Exception {
 
         Usuario usuario = this.findUsuario(id);
@@ -69,4 +73,15 @@ public class UsuarioService {
         return usuario.get();
 
     }
+
+    private Usuario findUsuarioByCpf(String cpf) {
+        Optional<Usuario> usuario = usuarioRepository.findUsuarioByCpf(cpf);
+
+        if (usuario.isEmpty())
+            return null;
+
+        return usuario.get();
+
+    }
+
 }

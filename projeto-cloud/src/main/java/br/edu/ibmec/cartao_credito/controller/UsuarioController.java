@@ -38,6 +38,16 @@ public class UsuarioController {
         }
     }
 
+    @GetMapping("/{cpf}")
+    public ResponseEntity<Usuario> buscarUsuario(@PathVariable String cpf) {
+        Usuario usuario = usuarioService.buscaUsuarioPorCpf(cpf);
+        if (usuario != null) {
+            return new ResponseEntity<>(usuario, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PostMapping("/{id}/cartao")
     public ResponseEntity<String> associarCartao(@PathVariable int id, @Valid @RequestBody Cartao cartao) {
         try {
