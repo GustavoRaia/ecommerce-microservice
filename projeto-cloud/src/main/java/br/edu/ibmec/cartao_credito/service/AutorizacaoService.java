@@ -39,7 +39,7 @@ public class AutorizacaoService {
                 .filter(t -> t.getValor() == valor && t.getComerciante().equals(comerciante))
                 .count();
 
-        if (transacoesDuplicadas >= 2) {
+        if (transacoesDuplicadas > 0) {
             throw new TransacaoException("Transação duplicada");
         }
     }

@@ -84,9 +84,9 @@ public class CartaoServiceTest {
     // Teste para buscar cartão por ID que existe
     @Test
     public void testBuscarCartaoPorId_CartaoExistente() {
-        when(cartaoRepository.findById(1)).thenReturn(Optional.of(cartao));
+        when(cartaoRepository.findByNumero("1")).thenReturn((cartao));
 
-        Cartao resultado = cartaoService.buscarCartaoPorId(1);
+        Cartao resultado = cartaoService.buscarCartaoPorNumero("1");
 
         assertNotNull(resultado);
         assertEquals(1, resultado.getId());
@@ -97,7 +97,7 @@ public class CartaoServiceTest {
     public void testBuscarCartaoPorId_CartaoNaoExistente() {
         when(cartaoRepository.findById(1)).thenReturn(Optional.empty());
 
-        Cartao resultado = cartaoService.buscarCartaoPorId(1);
+        Cartao resultado = cartaoService.buscarCartaoPorNumero("1");
 
         assertNull(resultado);
     }

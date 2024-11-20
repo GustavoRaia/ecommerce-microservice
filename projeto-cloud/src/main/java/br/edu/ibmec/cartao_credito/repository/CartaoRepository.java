@@ -7,5 +7,7 @@ import br.edu.ibmec.cartao_credito.model.Cartao;
 
 @Repository
 public interface CartaoRepository extends JpaRepository<Cartao, Integer> {
-    
+
+    Cartao findByNumero(String numero);
+
 }

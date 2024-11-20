@@ -20,8 +20,12 @@ public class CartaoService {
         }
 
         Cartao cartaoAtivar = cartao.get();
-        cartaoAtivar.setAtivo(true);
-        cartaoRepository.save(cartaoAtivar);
+        if (!cartaoAtivar.getAtivo()) {
+            cartaoAtivar.setAtivo(true);
+            cartaoRepository.save(cartaoAtivar);
+        } else {
+            throw new Exception("Cartão já está ativo.");
+        }
     }
 
     public void desativarCartao(int id) throws Exception {
@@ -31,11 +35,15 @@ public class CartaoService {
         }
 
         Cartao cartaoDesativar = cartao.get();
-        cartaoDesativar.setAtivo(false);
-        cartaoRepository.save(cartaoDesativar);
+        if (cartaoDesativar.getAtivo()) {
+            cartaoDesativar.setAtivo(false);
+            cartaoRepository.save(cartaoDesativar);
+        } else {
+            throw new Exception("Cartão já está desativado.");
+        }
     }
 
-    public Cartao buscarCartaoPorId(int id) {
-        return cartaoRepository.findById(id).orElse(null);
+    public Cartao buscarCartaoPorNumero(String numero) {
+        return cartaoRepository.findByNumero(numero);
     }
 }
